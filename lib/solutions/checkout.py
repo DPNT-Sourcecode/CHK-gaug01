@@ -28,12 +28,12 @@ PRICES = [
         "offer": {}
     },
 ]
-ITEMS = [item['item'] for item in PRICES]
+ITEMS = [item['item'] for item in PRICES if item['item']]
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    sku_list = list(skus.upper())
+    sku_list = list(skus)
     if len(sku_list) > 0:
         denomination = Counter(sku_list)
         total_price = 0
