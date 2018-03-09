@@ -243,8 +243,15 @@ def get_combinations(item_list):
     on the promo keys
     """
     promo = [char for char in item_list if char in GROUP_PROMO['group']]
+    objs = [get_item(PRICES, sku) for sku in promo]
+    sorted_objs = sorted(
+        objs,
+        key=lambda k: k['price'],
+        reverse=True
+    )
+    sorted_promo = [char['item'] for char in sorted_objs]
     combination = [
-        comb for comb in combinations(promo, GROUP_PROMO['quantity'])
+        comb for comb in combinations(sorted_promo, GROUP_PROMO['quantity'])
     ]
     return promo, combination
 
