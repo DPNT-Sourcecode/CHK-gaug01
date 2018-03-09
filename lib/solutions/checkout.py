@@ -4,6 +4,7 @@ PRICES = [
     {
         "item": "A",
         "price": 50,
+        "has_free": False,
         "offers": [  # used for special offer
             {
                 "quantity": 3,
@@ -18,6 +19,7 @@ PRICES = [
     {
         "item": "B",
         "price": 30,
+        "has_free": False,
         "offers": [  # used for special offer
             {
                 "quantity": 2,
@@ -28,16 +30,19 @@ PRICES = [
     {
         "item": "C",
         "price": 20,
+        "has_free": False,
         "offers": []
     },
     {
         "item": "D",
         "price": 15,
+        "has_free": False,
         "offers": []
     },
     {
         "item": "E",
         "price": 40,
+        "has_free": True,
         "offers": [
             {
                 "free": "B",
@@ -66,7 +71,12 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             skipped_keys = []
-            for key, value in denomination.items():
+            sort_denomination = sorted(
+                denomination.items(),
+                key=lambda k: k.get('has_free'),
+                reverse=True
+            )
+            for key, value in sort_denomination.items():
                 occurence = value
                 print(skipped_keys)
                 skipped_obj = next(
