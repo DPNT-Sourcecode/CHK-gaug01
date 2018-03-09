@@ -33,7 +33,7 @@ PRICES = [
 # skus = unicode string
 def checkout(skus):
     price = -1
-    sku_list = list(skus)
+    sku_list = list(skus.upper())
     if len(sku_list) > 0:
         denomination = Counter(sku_list)
         for key, value in denomination.items():
