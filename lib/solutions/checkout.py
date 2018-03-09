@@ -1,5 +1,3 @@
-import math
-
 from collections import Counter
 
 PRICES = [
@@ -39,21 +37,6 @@ PRICES = [
     },
 ]
 ITEMS = [item['item'] for item in PRICES]
-
-
-def get_special_offers_and_remainder(offers, value, quantities):
-    """
-    """
-    for quantity in quantities:
-        if value >= quantity:
-            remainder = value % quantity
-            extra, occurence = math.modf(value / quantity)
-
-            if remainder > 0:
-                value = remainder
-                continue
-    return (offers, remainder)
-
 
 
 # noinspection PyUnusedLocal
@@ -103,10 +86,6 @@ def checkout(skus):
                                         item_price += (
                                             offered_quantity * special_price
                                         )
-                        print(obj['item'])
-                        print(offers)
-                        print(item_price)
-                        print(remainder)
                         # value here is equivalent to remainder.
                         # if there's still a remainder, compute using
                         # the individual price
@@ -115,24 +94,6 @@ def checkout(skus):
 
                     else:  # No special offer
                         item_price = value * individual_price
-                    # offer = obj.get('offers')
-                    # if offer:  # check if there is a special offer
-                    #     quantity = offer.get('quantity')
-                    #     special_price = offer.get('special_price')
-                    #     remainder = value % quantity
-                    #     offered_quantity = value / quantity
-                    #     if remainder == 0:
-                    #         item_price = offered_quantity * special_price
-                    #     else:
-                    #         # check if special offer applies
-                    #         if offered_quantity > 0:  # Apply special offer
-                    #             item_price = offered_quantity * special_price
-                    #             remainder_price = remainder * individual_price
-                    #             item_price += remainder_price
-                    #         else:  # special offer not applicable
-                    #             item_price = remainder * individual_price
-                    # else:  # No special offer
-                    #     item_price = value * individual_price
                     total_price += item_price
             return total_price
     return -1
