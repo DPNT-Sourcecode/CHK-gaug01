@@ -1,4 +1,5 @@
 from collections import Counter
+from itertools import combinations
 
 PRICES = [
     {
@@ -236,6 +237,17 @@ PRICES = [
 ]
 ITEMS = [item['item'] for item in PRICES]
 
+GROUP_PROMO = {
+    "group": ["S", "T", "X", "Y", "Z"],
+    "special_price": 45,
+    "quantity": 3
+}
+PROMO_COMBINATIONS = [
+    comb for comb in combinations(
+        GROUP_PROMO['group'], GROUP_PROMO['quantity']
+    )
+]
+
 
 def get_item(obj_list, lookup):
     """
@@ -259,6 +271,10 @@ def checkout(skus):
 
     sku_list = list(skus)
     if len(sku_list) > 0:
+        promo = [char for char in sku_list if char in GROUP_PROMO['group']]
+        combination = [
+            comb for comb in combinations(promo, GROUP_PROMO['quantity'])
+        ]
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
