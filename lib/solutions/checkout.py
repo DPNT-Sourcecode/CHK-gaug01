@@ -60,6 +60,7 @@ def checkout(skus):
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
+        free = []
 
         # process only if given `skus` match
         # the existing ITEMS list
@@ -85,19 +86,23 @@ def checkout(skus):
 
                             quantity = offer.get('quantity')
                             if remainder >= quantity:
-                                has_free = offer.get('free', False)
-                                special_price = offer.get('special_price')
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
-                                if extra == 0:
-                                    item_price += (
-                                        offered_quantity * special_price
-                                    )
+                                has_free = offer.get('free', False)
+                                if has_free:
+                                    free.append(has_free)
+
                                 else:
-                                    if offered_quantity > 0:
+                                    special_price = offer.get('special_price')
+                                    if extra == 0:
                                         item_price += (
                                             offered_quantity * special_price
                                         )
+                                    else:
+                                        if offered_quantity > 0:
+                                            item_price += (
+                                                offered_quantity * special_price
+                                            )
                                 remainder = extra
 
                         # value here is equivalent to remainder.
