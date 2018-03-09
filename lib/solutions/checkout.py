@@ -134,6 +134,7 @@ def checkout(skus):
                                         extra = remainder % (quantity + 1)
                                         print(extra)
                                         print(offered_quantity)
+                                        left = offered_quantity - extra
                                         if extra == 0:
                                             item_price -= (
                                                 individual_price * offered_quantity
