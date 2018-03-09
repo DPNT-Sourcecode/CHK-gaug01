@@ -76,6 +76,7 @@ def checkout(skus):
                     None
                 )
                 if skipped_obj:
+                    print("here")
                     occurence -= skipped_obj['quantity']
                     if occurence == 0:
                         continue
@@ -108,6 +109,8 @@ def checkout(skus):
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
                                 free = offer.get('free', False)
+                                print(free)
+                                print(keys)
                                 if free in keys:
                                     item_price += (
                                         remainder * individual_price
