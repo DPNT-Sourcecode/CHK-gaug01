@@ -233,6 +233,14 @@ def get_item(obj_list, lookup):
     )
 
 
+def get_combinations(item_list):
+    promo = [char for char in item_list if char in GROUP_PROMO['group']]
+    combination = [
+        comb for comb in combinations(promo, GROUP_PROMO['quantity'])
+    ]
+    return promo, combination
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -242,21 +250,20 @@ def checkout(skus):
     sku_list = list(skus)
     if len(sku_list) > 0:
         total_price = 0
-        promo = [char for char in sku_list if char in GROUP_PROMO['group']]
-        combination = [
-            comb for comb in combinations(promo, GROUP_PROMO['quantity'])
-        ]
-
-        if len(promo) > 0:
+        promo, combination = get_combinations(sku_list)
+        promo_len = len(promo)
+        if promo_len > 0:
             for comb in combination:
                 if comb in PROMO_COMBINATIONS:
-
-                    print(comb)
                     total_price += GROUP_PROMO['special_price']
 
                     for char in comb:
                         if char in sku_list:
                             sku_list.remove(char)
+
+            num_group = promo_len / GROUP_PROMO['quantity']
+            total_price += (GROUP_PROMO['special_price'] * num_group)
+            print(total_price)
 
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
