@@ -107,7 +107,7 @@ def checkout(skus):
                                         None
                                     )
                                     if free_obj:
-                                        item_price -= free_obj['price']
+                                        item_price -= (offered_quantity * free_obj['price'])
                                     has_free = True
 
                                 else:
