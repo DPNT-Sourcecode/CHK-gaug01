@@ -58,7 +58,6 @@ def checkout(skus):
     sku_list = list(skus)
     if len(sku_list) > 0:
         denomination = Counter(sku_list)
-        denomination.most_common()
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
 
@@ -67,8 +66,10 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             skipped_keys = []
-            for key, value in denomination.items():
+            key_items = denomination.most_common()
+            for key, value in key_items:
                 occurence = value
+                print(skipped_keys)
                 skipped_obj = next(
                     (
                         item for item in skipped_keys
@@ -121,8 +122,6 @@ def checkout(skus):
                                         ),
                                         None
                                     )
-                                    print("free in keys")
-                                    print(free_obj)
                                     if free_obj:
                                         skipped_keys.append({
                                             'item': free_obj['item'],
