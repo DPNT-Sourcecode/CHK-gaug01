@@ -39,6 +39,9 @@ def checkout(skus):
         total_price = 0
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
+
+        # process only if given `skus` match
+        # the existing ITEMS list
         if keys.intersection(item_keys):
             for key, value in denomination.items():
                 price_obj = [price for price in PRICES if price['item'] == key]
@@ -67,6 +70,4 @@ def checkout(skus):
                         item_price = value * individual_price
                     total_price += item_price
             return total_price
-        else:
-            return -1
     return -1
