@@ -271,10 +271,18 @@ def checkout(skus):
 
     sku_list = list(skus)
     if len(sku_list) > 0:
+        total_price = 0
         promo = [char for char in sku_list if char in GROUP_PROMO['group']]
         combination = [
             comb for comb in combinations(promo, GROUP_PROMO['quantity'])
         ]
+        if len(promo) > 0:
+            for comb in combination:
+                if comb in PROMO_COMBINATIONS:
+                    total_price += GROUP_PROMO['special_price']
+                    for char in comb:
+                        sku_list.remove(char)
+
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
@@ -282,7 +290,6 @@ def checkout(skus):
         # process only if given `skus` match
         # the existing ITEMS list
         if keys.issubset(item_keys):
-            total_price = 0
             skipped_keys = []
             key_items = sorted(
                 denomination.most_common(),
