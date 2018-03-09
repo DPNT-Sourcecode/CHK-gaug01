@@ -113,8 +113,9 @@ def checkout(skus):
                             item_price += (value * individual_price)
 
                     else:  # No special offer
+                        print("no offer")
+                        print(value)
                         item_price = value * individual_price
-                    print(value)
                     # offer = obj.get('offers')
                     # if offer:  # check if there is a special offer
                     #     quantity = offer.get('quantity')
