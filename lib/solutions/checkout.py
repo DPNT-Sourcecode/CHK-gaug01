@@ -131,20 +131,20 @@ def checkout(skus):
                                     )
                                     print(item_price)
                                     if free == obj['item']:
-                                        extra = remainder % (quantity + 1)
-                                        print(extra)
-                                        print(offered_quantity)
-                                        if extra == 0:
-                                            print("zero")
-                                            item_price -= (
-                                                individual_price * offered_quantity
-                                            )
-                                        else:
-                                            if offered_quantity > 0:
-                                                print("extra")
-                                                item_price -= (
-                                                    individual_price * 1
-                                                )
+                                        item_price -= (offered_quantity * individual_price)
+                                        # extra = remainder % (quantity + 1)
+                                        # print(extra)
+                                        # print(offered_quantity)
+                                        # if extra == 0:
+                                        #     print("zero")
+                                        #     item_price -= (
+                                        #         individual_price * offered_quantity
+                                        #     )
+                                        # else:
+                                        #     print("extra")
+                                        #     item_price -= (
+                                        #         individual_price * offered_quantity
+                                        #     )
                                         has_free = True
 
                                     elif free in keys:
