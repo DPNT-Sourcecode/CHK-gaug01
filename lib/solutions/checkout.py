@@ -262,14 +262,20 @@ def checkout(skus):
         print(promo)
         promo_len = len(promo)
         if promo_len > 0:
-            for comb in combination:
-                if comb in PROMO_COMBINATIONS:
-                    for char in comb:
-                        if char in sku_list:
-                            sku_list.remove(char)
+            # for comb in combination:
+            #     if comb in PROMO_COMBINATIONS:
+            #         for char in comb:
+            #             if char in sku_list:
+            #                 sku_list.remove(char)
 
             num_group = promo_len / GROUP_PROMO['quantity']
             total_price += (GROUP_PROMO['special_price'] * num_group)
+
+            # format sku_list to remove the promo items
+            index = num_group * GROUP_PROMO['quantity']
+            promo = promo[:index]
+            for sku in promo:
+                sku_list.remove(sku)
 
         print(sku_list)
         denomination = Counter(sku_list)
