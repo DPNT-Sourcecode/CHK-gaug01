@@ -91,9 +91,10 @@ def checkout(skus):
                                 remainder = value % quantity
                                 offered_quantity = value / quantity
                                 if remainder == 0:
-                                    item_price = offered_quantity * special_price
-                                    total_price += item_price
+                                    item_price += (offered_quantity * special_price)
                                 else:
+                                    if offered_quantity > 0:
+                                        item_price += (offered_quantity * special_price)
                                     value = remainder
 
                         # value here is equivalent to remainder.
@@ -105,7 +106,6 @@ def checkout(skus):
 
                     else:  # No special offer
                         item_price = value * individual_price
-                        
 
                     # offer = obj.get('offers')
                     # if offer:  # check if there is a special offer
