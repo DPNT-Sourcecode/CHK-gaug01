@@ -4,28 +4,35 @@ PRICES = [
     {
         "item": "A",
         "price": 50,
-        "offer": {  # used for special offer
-            "quantity": 3,
-            "special_price": 130
-        }
+        "offers": [  # used for special offer
+            {
+                "quantity": 3,
+                "special_price": 130
+            },
+            {
+
+            }
+        ]
     },
     {
         "item": "B",
         "price": 30,
-        "offer": {  # used for special offer
-            "quantity": 2,
-            "special_price": 45
-        }
+        "offers": [  # used for special offer
+            {
+                "quantity": 2,
+                "special_price": 45
+            }
+        ]
     },
     {
         "item": "C",
         "price": 20,
-        "offer": {}
+        "offers": []
     },
     {
         "item": "D",
         "price": 15,
-        "offer": {}
+        "offers": []
     },
 ]
 ITEMS = [item['item'] for item in PRICES]
@@ -52,7 +59,7 @@ def checkout(skus):
                     item_price = 0
                     obj = price_obj[0]
                     individual_price = obj.get('price')
-                    offer = obj.get('offer')
+                    offer = obj.get('offers')
                     if offer:  # check if there is a special offer
                         quantity = offer.get('quantity')
                         special_price = offer.get('special_price')
