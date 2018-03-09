@@ -153,24 +153,12 @@ PRICES = [
     {
         "item": "S",
         "price": 30,
-        "offers": [
-            {
-                "combination": ["S", "T", "X", "Y", "Z"],
-                "special_price": 45,
-                "quantity": 3
-            }
-        ]
+        "offers": []
     },
     {
         "item": "T",
         "price": 20,
-        "offers": [
-            {
-                "combination": ["S", "T", "X", "Y", "Z"],
-                "special_price": 45,
-                "quantity": 3
-            }
-        ]
+        "offers": []
     },
     {
         "item": "U",
@@ -204,35 +192,17 @@ PRICES = [
     {
         "item": "X",
         "price": 90,
-        "offers": [
-            {
-                "combination": ["S", "T", "X", "Y", "Z"],
-                "special_price": 45,
-                "quantity": 3
-            }
-        ]
+        "offers": []
     },
     {
         "item": "Y",
         "price": 10,
-        "offers": [
-            {
-                "combination": ["S", "T", "X", "Y", "Z"],
-                "special_price": 45,
-                "quantity": 3
-            }
-        ]
+        "offers": []
     },
     {
         "item": "Z",
         "price": 50,
-        "offers": [
-            {
-                "combination": ["S", "T", "X", "Y", "Z"],
-                "special_price": 45,
-                "quantity": 3
-            }
-        ]
+        "offers": []
     },
 ]
 ITEMS = [item['item'] for item in PRICES]
