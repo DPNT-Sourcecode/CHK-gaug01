@@ -81,28 +81,34 @@ def checkout(skus):
                     offers = obj.get('offers')
 
                     if offers:
-                        offers = sorted(offers, key=lambda k: k['quantity'], reverse=True)
+                        offers = sorted(
+                            offers,
+                            key=lambda k: k['quantity'],
+                            reverse=True
+                        )
 
                         for offer in offers:
                             quantity = offer.get('quantity')
-                            print(value, quantity)
                             if value >= quantity:
                                 special_price = offer.get('special_price')
                                 remainder = value % quantity
                                 offered_quantity = value / quantity
                                 if remainder == 0:
-                                    item_price += (offered_quantity * special_price)
+                                    item_price += (
+                                        offered_quantity * special_price
+                                    )
                                 else:
                                     if offered_quantity > 0:
-                                        item_price += (offered_quantity * special_price)
+                                        item_price += (
+                                            offered_quantity * special_price
+                                        )
                                     value = remainder
 
                         # value here is equivalent to remainder.
                         # if there's still a remainder, compute using
                         # the individual price
                         if value > 0:
-                            item_price = value * individual_price
-                            total_price += item_price
+                            item_price += (value * individual_price)
 
                     else:  # No special offer
                         item_price = value * individual_price
