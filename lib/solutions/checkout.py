@@ -259,6 +259,7 @@ def checkout(skus):
     if len(sku_list) > 0:
         total_price = 0
         promo, combination = get_combinations(sku_list)
+        print(promo)
         promo_len = len(promo)
         if promo_len > 0:
             for comb in combination:
