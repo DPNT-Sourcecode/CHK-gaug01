@@ -111,17 +111,19 @@ def checkout(skus):
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
                                 free = offer.get('free', False)
-                                if free in keys:
+                                if free:
                                     item_price += (
                                         remainder * individual_price
                                     )
-                                    free_obj = get_item(PRICES, free)
-                                    if free_obj:
-                                        skipped_keys.append({
-                                            'item': free_obj['item'],
-                                            'quantity': offered_quantity
-                                        })
-                                    has_free = True
+
+                                    if free in keys:
+                                        free_obj = get_item(PRICES, free)
+                                        if free_obj:
+                                            skipped_keys.append({
+                                                'item': free_obj['item'],
+                                                'quantity': offered_quantity
+                                            })
+                                        has_free = True
 
                                 else:
                                     special_price = offer.get('special_price')
