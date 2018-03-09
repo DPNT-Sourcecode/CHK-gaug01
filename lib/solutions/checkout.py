@@ -87,11 +87,11 @@ PRICES = [
     },
     {
         "item": "K",
-        "price": 80,
+        "price": 70,
         "offers": [  # used for special offer
             {
                 "quantity": 2,
-                "special_price": 150
+                "special_price": 120
             }
         ]
     },
