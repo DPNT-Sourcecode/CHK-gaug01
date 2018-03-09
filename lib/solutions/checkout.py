@@ -234,6 +234,10 @@ def get_item(obj_list, lookup):
 
 
 def get_combinations(item_list):
+    """
+    Returns tuple of promo keys and list of combinations based
+    on the promo keys
+    """
     promo = [char for char in item_list if char in GROUP_PROMO['group']]
     combination = [
         comb for comb in combinations(promo, GROUP_PROMO['quantity'])
