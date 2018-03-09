@@ -80,7 +80,11 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             skipped_keys = []
-            key_items = denomination.most_common()
+            key_items = sorted(
+                denomination.most_common(),
+                key=lambda k: k[0],
+                reverse=True
+            )
             for key, value in key_items:
                 occurence = value
                 skipped_obj = get_item(skipped_keys, key)
