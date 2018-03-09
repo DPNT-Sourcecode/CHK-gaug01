@@ -249,6 +249,8 @@ def checkout(skus):
         if len(promo) > 0:
             for comb in combination:
                 if comb in PROMO_COMBINATIONS:
+                    print(combination)
+                    print(comb)
                     total_price += GROUP_PROMO['special_price']
                     for char in comb:
                         sku_list.remove(char)
