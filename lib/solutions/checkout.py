@@ -66,6 +66,7 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             for key, value in denomination.items():
+                has_free = False
                 obj = next(
                     (
                         price for price in PRICES
@@ -92,22 +93,22 @@ def checkout(skus):
                             if remainder >= quantity:
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
-                                has_free = offer.get('free', False)
-                                if has_free in keys:
+                                free = offer.get('free', False)
+                                if free in keys:
                                     item_price += (
-                                        offered_quantity * individual_price
+                                        remainder * individual_price
                                     )
 
                                     free_obj = next(
                                         (
                                             item for item in PRICES
-                                            if item['item'] == has_free
+                                            if item['item'] == free
                                         ),
                                         None
                                     )
                                     if free_obj:
                                         item_price -= free_obj['price']
-                                    print(item_price)
+                                    has_free = True
 
                                 else:
                                     special_price = offer.get('special_price')
@@ -125,7 +126,7 @@ def checkout(skus):
                         # value here is equivalent to remainder.
                         # if there's still a remainder, compute using
                         # the individual price
-                        if remainder > 0:
+                        if not has_free and remainder > 0:
                             item_price += (remainder * individual_price)
 
                     else:  # No special offer
