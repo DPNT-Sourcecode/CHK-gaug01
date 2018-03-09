@@ -28,6 +28,7 @@ PRICES = [
         "offer": {}
     },
 ]
+ITEMS = [item['item'] for item in PRICES]
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -62,4 +63,5 @@ def checkout(skus):
                 else:  # No special offer
                     item_price = value * individual_price
                 total_price += item_price
+        return total_price
     return -1
