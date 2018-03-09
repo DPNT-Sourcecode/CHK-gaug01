@@ -28,7 +28,7 @@ PRICES = [
         "offer": {}
     },
 ]
-ITEMS = [item['item'] for item in PRICES if item['item']]
+ITEMS = [item['item'] for item in PRICES]
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -36,13 +36,13 @@ def checkout(skus):
     sku_list = list(skus)
     if len(sku_list) > 0:
         denomination = Counter(sku_list)
-        total_price = 0
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
 
         # process only if given `skus` match
         # the existing ITEMS list
         if keys.intersection(item_keys):
+            total_price = 0
             for key, value in denomination.items():
                 price_obj = [price for price in PRICES if price['item'] == key]
                 if len(price_obj) > 0:
