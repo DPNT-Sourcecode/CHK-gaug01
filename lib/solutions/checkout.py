@@ -1,5 +1,9 @@
 from collections import Counter
-from itertools import combinations
+from itertools import (
+    combinations,
+    combinations_with_replacement,
+)
+
 
 PRICES = [
     {
@@ -213,7 +217,7 @@ GROUP_PROMO = {
     "quantity": 3
 }
 PROMO_COMBINATIONS = [
-    comb for comb in combinations(
+    comb for comb in combinations_with_replacement(
         GROUP_PROMO['group'], GROUP_PROMO['quantity']
     )
 ]
@@ -265,10 +269,6 @@ def checkout(skus):
 
             num_group = promo_len / GROUP_PROMO['quantity']
             total_price += (GROUP_PROMO['special_price'] * num_group)
-            
-            print(combination)
-            print(total_price)
-            print(PROMO_COMBINATIONS)
 
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
