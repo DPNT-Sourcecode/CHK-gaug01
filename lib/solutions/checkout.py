@@ -257,12 +257,10 @@ def get_combinations(item_list):
         reverse=True
     )
     sorted_promo = [char['item'] for char in sorted_objs]
-    print(sorted_promo)
     combination = list(grouper(3, sorted_promo))
-    print(combination)
     combination = [comb for comb in combination if None not in comb]
 
-    return promo, combination
+    return sorted_promo, combination
 
 
 # noinspection PyUnusedLocal
@@ -277,14 +275,6 @@ def checkout(skus):
         promo, combination = get_combinations(sku_list)
         promo_len = len(promo)
         if promo_len > 0:
-            # for comb in combination:
-            #     if comb in PROMO_COMBINATIONS and \
-            #        GROUP_PROMO['quantity'] < len(sku_list):
-            #         for char in comb:
-            #             if char in sku_list:
-            #                 sku_list.remove(char)
-            #     else:
-            #         break
 
             num_group = promo_len / GROUP_PROMO['quantity']
             total_price += (GROUP_PROMO['special_price'] * num_group)
