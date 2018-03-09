@@ -44,7 +44,7 @@ def checkout(skus):
 
         # process only if given `skus` match
         # the existing ITEMS list
-        if keys.intersection(item_keys):
+        if keys.issubset(item_keys):
             total_price = 0
             for key, value in denomination.items():
                 price_obj = [price for price in PRICES if price['item'] == key]
