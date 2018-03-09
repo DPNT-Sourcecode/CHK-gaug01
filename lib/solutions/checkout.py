@@ -68,6 +68,7 @@ def checkout(skus):
             skipped_keys = []
             for key, value in denomination.items():
                 occurence = value
+                print(skipped_keys)
                 skipped_obj = next(
                     (
                         item for item in skipped_keys
@@ -109,13 +110,10 @@ def checkout(skus):
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
                                 free = offer.get('free', False)
-                                print(free)
-                                print(keys)
                                 if free in keys:
                                     item_price += (
                                         remainder * individual_price
                                     )
-
                                     free_obj = next(
                                         (
                                             item for item in PRICES
@@ -123,9 +121,11 @@ def checkout(skus):
                                         ),
                                         None
                                     )
+                                    print("free in keys")
+                                    print(free_obj)
                                     if free_obj:
                                         skipped_keys.append({
-                                            'item': 'B',
+                                            'item': free_obj['item'],
                                             'quantity': offered_quantity
                                         })
                                         # item_price -= (offered_quantity * free_obj['price'])
