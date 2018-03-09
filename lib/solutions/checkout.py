@@ -38,7 +38,12 @@ PRICES = [
     {
         "item": "E",
         "price": 40,
-        "offers": []  # this won't matter to the total price
+        "offers": [
+            {
+                "free": "B",
+                "quantity": 2
+            }
+        ]
     }
 ]
 ITEMS = [item['item'] for item in PRICES]
@@ -71,12 +76,15 @@ def checkout(skus):
                     if offers:
                         offers = sorted(
                             offers,
-                            key=lambda k: k['quantity'],
+                            key=lambda k: k.get('quantity'),
                             reverse=True
                         )
 
                         remainder = value
                         for offer in offers:
+                            has_free = offer.get('free', False)
+                            if has_free:
+
                             quantity = offer.get('quantity')
                             if remainder >= quantity:
                                 special_price = offer.get('special_price')
