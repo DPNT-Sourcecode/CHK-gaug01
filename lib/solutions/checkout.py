@@ -66,11 +66,9 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             skipped_keys = []
+            print(denomination.items())
             for key, value in denomination.items():
                 occurence = value
-                print(skipped_keys)
-                print(key)
-                print(denomination)
                 skipped_obj = next(
                     (
                         item for item in skipped_keys
