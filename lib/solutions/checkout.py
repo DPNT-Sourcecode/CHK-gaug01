@@ -69,7 +69,6 @@ def checkout(skus):
             key_items = denomination.most_common()
             for key, value in key_items:
                 occurence = value
-                print(skipped_keys)
                 skipped_obj = next(
                     (
                         item for item in skipped_keys
@@ -78,9 +77,8 @@ def checkout(skus):
                     None
                 )
                 if skipped_obj:
-                    print("here")
                     occurence -= skipped_obj['quantity']
-                    if occurence == 0:
+                    if occurence == 0:  # skip key if already free
                         continue
 
                 has_free = False
@@ -127,7 +125,6 @@ def checkout(skus):
                                             'item': free_obj['item'],
                                             'quantity': offered_quantity
                                         })
-                                        # item_price -= (offered_quantity * free_obj['price'])
                                     has_free = True
 
                                 else:
