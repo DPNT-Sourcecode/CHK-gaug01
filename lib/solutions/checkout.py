@@ -49,6 +49,20 @@ PRICES = [
 ITEMS = [item['item'] for item in PRICES]
 
 
+def get_item(obj_list, lookup):
+    """
+    Returns a dictionary object based on the given
+    `lookup` parameter
+    """
+    return next(
+        (
+            item for item in obj_list
+            if item['item'] == lookup
+        ),
+        None
+    )
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -69,26 +83,14 @@ def checkout(skus):
             key_items = denomination.most_common()
             for key, value in key_items:
                 occurence = value
-                skipped_obj = next(
-                    (
-                        item for item in skipped_keys
-                        if item['item'] == key
-                    ),
-                    None
-                )
+                skipped_obj = get_item(skipped_keys, key)
                 if skipped_obj:
                     occurence -= skipped_obj['quantity']
                     if occurence == 0:  # skip key if already free
                         continue
 
                 has_free = False
-                obj = next(
-                    (
-                        price for price in PRICES
-                        if price['item'] == key
-                    ),
-                    None
-                )
+                obj = get_item(PRICES, key)
                 if obj:
                     item_price = 0
                     individual_price = obj.get('price')
@@ -113,13 +115,7 @@ def checkout(skus):
                                     item_price += (
                                         remainder * individual_price
                                     )
-                                    free_obj = next(
-                                        (
-                                            item for item in PRICES
-                                            if item['item'] == free
-                                        ),
-                                        None
-                                    )
+                                    free_obj = get_item(PRICES, free)
                                     if free_obj:
                                         skipped_keys.append({
                                             'item': free_obj['item'],
