@@ -63,8 +63,7 @@ def checkout(skus):
                         else:
                             # check if special offer applies
                             if offered_quantity > 0:  # Apply special offer
-                                numbered_quantity = value - remainder
-                                item_price = numbered_quantity * special_price
+                                item_price = offered_quantity * special_price
                                 remainder_price = remainder * individual_price
                                 item_price += remainder_price
                             else:  # special offer not applicable
