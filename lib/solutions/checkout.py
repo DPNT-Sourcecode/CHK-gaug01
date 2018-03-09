@@ -87,6 +87,7 @@ def checkout(skus):
                             reverse=True
                         )
 
+                        remainder = value
                         for offer in offers:
                             quantity = offer.get('quantity')
                             print(value)
