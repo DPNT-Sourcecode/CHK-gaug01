@@ -91,28 +91,32 @@ def checkout(skus):
                             offers, value, quantities
                         )
 
-                    for offer in special_offers:
-                        occurence = offer.get("occurence")
-                        if occurence:
-                            promo_price = occurence * offer['special_price']
-                            item_price += promo_price
+                        for offer in special_offers:
+                            occurence = offer.get("occurence")
+                            if occurence:
+                                promo_price = occurence * offer['special_price']
+                                item_price += promo_price
 
-                    offer = obj.get('offers')
-                    if offer:  # check if there is a special offer
-                        quantity = offer.get('quantity')
-                        special_price = offer.get('special_price')
-                        remainder = value % quantity
-                        offered_quantity = value / quantity
-                        if remainder == 0:
-                            item_price = offered_quantity * special_price
-                        else:
-                            # check if special offer applies
-                            if offered_quantity > 0:  # Apply special offer
-                                item_price = offered_quantity * special_price
-                                remainder_price = remainder * individual_price
-                                item_price += remainder_price
-                            else:  # special offer not applicable
-                                item_price = remainder * individual_price
+                        if remainder > 0:
+                            remainder_price = remainder * individual_price
+                            item_price += remainder_price
+
+                    # offer = obj.get('offers')
+                    # if offer:  # check if there is a special offer
+                    #     quantity = offer.get('quantity')
+                    #     special_price = offer.get('special_price')
+                    #     remainder = value % quantity
+                    #     offered_quantity = value / quantity
+                    #     if remainder == 0:
+                    #         item_price = offered_quantity * special_price
+                    #     else:
+                    #         # check if special offer applies
+                    #         if offered_quantity > 0:  # Apply special offer
+                    #             item_price = offered_quantity * special_price
+                    #             remainder_price = remainder * individual_price
+                    #             item_price += remainder_price
+                    #         else:  # special offer not applicable
+                    #             item_price = remainder * individual_price
                     else:  # No special offer
                         item_price = value * individual_price
                     total_price += item_price
