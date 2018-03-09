@@ -94,6 +94,10 @@ def checkout(skus):
                                 offered_quantity = remainder / quantity
                                 has_free = offer.get('free', False)
                                 if has_free in keys:
+                                    item_price += (
+                                        remainder * individual_price
+                                    )
+
                                     free_obj = next(
                                         (
                                             item for item in PRICES
