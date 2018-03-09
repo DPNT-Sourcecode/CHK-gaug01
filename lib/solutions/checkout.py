@@ -65,7 +65,21 @@ def checkout(skus):
         # the existing ITEMS list
         if keys.issubset(item_keys):
             total_price = 0
+            skipped_keys = []
             for key, value in denomination.items():
+                occurence = value
+                skipped_obj = next(
+                    (
+                        item for item in skipped_keys
+                        if item['item'] == key
+                    ),
+                    None
+                )
+                if skipped_obj:
+                    occurence -= skipped_obj['quantity']
+                    if occurence == 0:
+                        continue
+
                 has_free = False
                 obj = next(
                     (
@@ -86,7 +100,7 @@ def checkout(skus):
                             reverse=True
                         )
 
-                        remainder = value
+                        remainder = occurence
                         for offer in offers:
 
                             quantity = offer.get('quantity')
@@ -107,7 +121,11 @@ def checkout(skus):
                                         None
                                     )
                                     if free_obj:
-                                        item_price -= (offered_quantity * free_obj['price'])
+                                        skipped_keys.append({
+                                            'item': 'B',
+                                            'quantity': offered_quantity
+                                        })
+                                        # item_price -= (offered_quantity * free_obj['price'])
                                     has_free = True
 
                                 else:
@@ -123,14 +141,14 @@ def checkout(skus):
                                             )
                                 remainder = extra
 
-                        # value here is equivalent to remainder.
+                        # occurence here is equivalent to remainder.
                         # if there's still a remainder, compute using
                         # the individual price
                         if not has_free and remainder > 0:
                             item_price += (remainder * individual_price)
 
                     else:  # No special offer
-                        item_price = value * individual_price
+                        item_price = occurence * individual_price
                     total_price += item_price
             return total_price
     return -1
