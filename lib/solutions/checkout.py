@@ -54,7 +54,155 @@ PRICES = [
                 "quantity": 2
             }
         ]
-    }
+    },
+    {
+        "item": "G",
+        "price": 20,
+        "offers": []
+    },
+    {
+        "item": "H",
+        "price": 10,
+        "offers": [  # used for special offer
+            {
+                "quantity": 5,
+                "special_price": 45
+            },
+            {
+                "quantity": 10,
+                "special_price": 80
+            }
+        ]
+    },
+    {
+        "item": "I",
+        "price": 35,
+        "offers": []
+    },
+    {
+        "item": "J",
+        "price": 60,
+        "offers": []
+    },
+    {
+        "item": "K",
+        "price": 80,
+        "offers": [  # used for special offer
+            {
+                "quantity": 2,
+                "special_price": 150
+            }
+        ]
+    },
+    {
+        "item": "L",
+        "price": 90,
+        "offers": []
+    },
+    {
+        "item": "M",
+        "price": 15,
+        "offers": []
+    },
+    {
+        "item": "N",
+        "price": 40,
+        "offers": [
+            {
+                "free": "M",
+                "quantity": 3
+            }
+        ]
+    },
+    {
+        "item": "O",
+        "price": 10,
+        "offers": []
+    },
+    {
+        "item": "P",
+        "price": 50,
+        "offers": [  # used for special offer
+            {
+                "quantity": 5,
+                "special_price": 200
+            }
+        ]
+    },
+    {
+        "item": "Q",
+        "price": 30,
+        "offers": [  # used for special offer
+            {
+                "quantity": 3,
+                "special_price": 80
+            }
+        ]
+    },
+    {
+        "item": "R",
+        "price": 50,
+        "offers": [  # used for special offer
+            {
+                "quantity": 3,
+                "free": "Q"
+            }
+        ]
+    },
+    {
+        "item": "S",
+        "price": 30,
+        "offers": []
+    },
+    {
+        "item": "T",
+        "price": 20,
+        "offers": []
+    },
+    {
+        "item": "U",
+        "price": 40,
+        "offers": [
+            {
+                "free": "U",
+                "quantity": 3
+            }
+        ]
+    },
+    {
+        "item": "V",
+        "price": 50,
+        "offers": [  # used for special offer
+            {
+                "quantity": 2,
+                "special_price": 90
+            },
+            {
+                "quantity": 3,
+                "special_price": 130
+            }
+        ]
+    },
+    {
+        "item": "W",
+        "price": 20,
+        "offers": []
+    },
+    {
+        "item": "X",
+        "price": 90,
+        "offers": []
+    },
+    {
+        "item": "Y",
+        "price": 10,
+        "offers": []
+    },
+    {
+        "item": "Z",
+        "price": 50,
+        "offers": []
+    },
 ]
 ITEMS = [item['item'] for item in PRICES]
 
