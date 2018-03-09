@@ -39,6 +39,7 @@ def checkout(skus):
         for key, value in denomination.items():
             price_obj = [price for price in PRICES if price['item'] == key]
             if len(price_obj) > 0:
+                item_price = 0
                 obj = price_obj[0]
                 individual_price = obj.get('price')
                 offer = obj.get('offer')
@@ -56,7 +57,9 @@ def checkout(skus):
                             item_price = numbered_quantity * special_price
                             remainder_price = remainder * individual_price
                             item_price += remainder_price
-                        else:
+                        else:  # special offer not applicable
                             item_price = remainder * individual_price
-                    total_price += item_price
+                else:  # No special offer
+                    item_price = value * individual_price
+                total_price += item_price
     return -1
