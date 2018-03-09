@@ -253,9 +253,10 @@ def checkout(skus):
 
                     print(comb)
                     total_price += GROUP_PROMO['special_price']
-                    for char in comb:
-                        if char in sku_list:
-                            sku_list.remove(char)
+                    combination.remove(comb)
+                    # for char in comb:
+                    #     if char in sku_list:
+                    #         sku_list.remove(char)
 
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
