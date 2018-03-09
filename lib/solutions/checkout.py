@@ -265,6 +265,8 @@ def checkout(skus):
 
             num_group = promo_len / GROUP_PROMO['quantity']
             total_price += (GROUP_PROMO['special_price'] * num_group)
+            print(total_price)
+            print(PROMO_COMBINATIONS)
 
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
