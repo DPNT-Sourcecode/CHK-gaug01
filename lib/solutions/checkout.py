@@ -1,3 +1,5 @@
+import math
+
 from collections import Counter
 
 PRICES = [
@@ -10,7 +12,8 @@ PRICES = [
                 "special_price": 130
             },
             {
-
+                "quantity": 5,
+                "special_price": 200
             }
         ]
     },
@@ -37,6 +40,25 @@ PRICES = [
 ]
 ITEMS = [item['item'] for item in PRICES]
 
+
+def get_special_offers(offers, value, quantities):
+    """
+    """
+    for quantity in quantities:
+        if value >= quantity:
+            remainder = value % quantity
+            extra, occurence = math.modf(value / quantity)
+            offers = [
+                offer.update({"occurence": int(occurence)})
+                for offer in offers if offer['quantity'] == quantity
+            ]
+            if remainder > 0:
+                value = remainder
+                continue
+    return offers
+
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -59,6 +81,16 @@ def checkout(skus):
                     item_price = 0
                     obj = price_obj[0]
                     individual_price = obj.get('price')
+                    offers = obj.get('offers')
+
+                    if offers:
+                        quantities = [offer['quantity'] for offer in offers]
+                        quantities.sort(reverse=True)
+
+                        special_offers = get_special_offers(
+                            offers, value, quantities
+                        )
+
                     offer = obj.get('offers')
                     if offer:  # check if there is a special offer
                         quantity = offer.get('quantity')
