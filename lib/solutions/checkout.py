@@ -4,7 +4,6 @@ PRICES = [
     {
         "item": "A",
         "price": 50,
-        "has_free": False,
         "offers": [  # used for special offer
             {
                 "quantity": 3,
@@ -19,7 +18,6 @@ PRICES = [
     {
         "item": "B",
         "price": 30,
-        "has_free": False,
         "offers": [  # used for special offer
             {
                 "quantity": 2,
@@ -30,19 +28,16 @@ PRICES = [
     {
         "item": "C",
         "price": 20,
-        "has_free": False,
         "offers": []
     },
     {
         "item": "D",
         "price": 15,
-        "has_free": False,
         "offers": []
     },
     {
         "item": "E",
         "price": 40,
-        "has_free": True,
         "offers": [
             {
                 "free": "B",
