@@ -33,6 +33,9 @@ ITEMS = [item['item'] for item in PRICES]
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    if not skus:
+        return 0
+
     sku_list = list(skus)
     if len(sku_list) > 0:
         denomination = Counter(sku_list)
