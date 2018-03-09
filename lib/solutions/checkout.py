@@ -48,10 +48,7 @@ def get_special_offers_and_remainder(offers, value, quantities):
         if value >= quantity:
             remainder = value % quantity
             extra, occurence = math.modf(value / quantity)
-            offers = [
-                offer.update({"occurence": int(occurence)})
-                for offer in offers if offer['quantity'] == quantity
-            ]
+
             if remainder > 0:
                 value = remainder
                 continue
@@ -84,22 +81,30 @@ def checkout(skus):
                     offers = obj.get('offers')
 
                     if offers:
-                        quantities = [offer['quantity'] for offer in offers]
-                        quantities.sort(reverse=True)
+                        offers = sorted(offers, key=lambda k: k['quantity'], reverse=True)
 
-                        special_offers, remainder = get_special_offers_and_remainder(
-                            offers, value, quantities
-                        )
+                        for offer in offers:
+                            quantity = offer.get('quantity')
+                            if value >= quantity:
+                                special_price = offer.get('special_price')
+                                remainder = value % quantity
+                                offered_quantity = value / quantity
+                                if remainder == 0:
+                                    item_price = offered_quantity * special_price
+                                    total_price += item_price
+                                else:
+                                    value = remainder
 
-                        for offer in special_offers:
-                            occurence = offer.get("occurence")
-                            if occurence:
-                                promo_price = occurence * offer['special_price']
-                                item_price += promo_price
+                        # value here is equivalent to remainder.
+                        # if there's still a remainder, compute using
+                        # the individual price
+                        if value > 0:
+                            item_price = value * individual_price
+                            total_price += item_price
 
-                        if remainder > 0:
-                            remainder_price = remainder * individual_price
-                            item_price += remainder_price
+                    else:  # No special offer
+                        item_price = value * individual_price
+                        
 
                     # offer = obj.get('offers')
                     # if offer:  # check if there is a special offer
@@ -117,8 +122,8 @@ def checkout(skus):
                     #             item_price += remainder_price
                     #         else:  # special offer not applicable
                     #             item_price = remainder * individual_price
-                    else:  # No special offer
-                        item_price = value * individual_price
+                    # else:  # No special offer
+                    #     item_price = value * individual_price
                     total_price += item_price
             return total_price
     return -1
