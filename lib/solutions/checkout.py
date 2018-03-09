@@ -129,7 +129,8 @@ def checkout(skus):
                                     item_price += (
                                         remainder * individual_price
                                     )
-                                    print(item_price)
+
+                                    # F case
                                     if free == obj['item']:
                                         factor = remainder / (quantity + 1)
                                         item_price -= (
@@ -137,6 +138,7 @@ def checkout(skus):
                                         )
                                         has_free = True
 
+                                    # E case
                                     elif free in keys:
                                         free_obj = get_item(PRICES, free)
                                         if free_obj:
