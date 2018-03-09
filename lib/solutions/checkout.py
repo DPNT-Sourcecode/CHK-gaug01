@@ -71,14 +71,11 @@ def checkout(skus):
         if keys.issubset(item_keys):
             total_price = 0
             skipped_keys = []
-            sort_denomination = sorted(
-                denomination.items(),
-                key=lambda k: k.get('has_free'),
-                reverse=True
-            )
-            for key, value in sort_denomination.items():
+            for key, value in denomination.items():
                 occurence = value
                 print(skipped_keys)
+                print(key)
+                print(denomination)
                 skipped_obj = next(
                     (
                         item for item in skipped_keys
