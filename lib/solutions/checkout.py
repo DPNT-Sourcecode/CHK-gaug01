@@ -41,7 +41,7 @@ PRICES = [
 ITEMS = [item['item'] for item in PRICES]
 
 
-def get_special_offers(offers, value, quantities):
+def get_special_offers_and_remainder(offers, value, quantities):
     """
     """
     for quantity in quantities:
@@ -55,7 +55,7 @@ def get_special_offers(offers, value, quantities):
             if remainder > 0:
                 value = remainder
                 continue
-    return offers
+    return (offers, remainder)
 
 
 
@@ -87,9 +87,15 @@ def checkout(skus):
                         quantities = [offer['quantity'] for offer in offers]
                         quantities.sort(reverse=True)
 
-                        special_offers = get_special_offers(
+                        special_offers, remainder = get_special_offers_and_remainder(
                             offers, value, quantities
                         )
+
+                    for offer in special_offers:
+                        occurence = offer.get("occurence")
+                        if occurence:
+                            promo_price = occurence * offer['special_price']
+                            item_price += promo_price
 
                     offer = obj.get('offers')
                     if offer:  # check if there is a special offer
