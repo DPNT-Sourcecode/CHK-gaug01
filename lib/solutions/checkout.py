@@ -152,7 +152,7 @@ PRICES = [
     },
     {
         "item": "S",
-        "price": 30,
+        "price": 20,
         "offers": []
     },
     {
@@ -191,17 +191,17 @@ PRICES = [
     },
     {
         "item": "X",
-        "price": 90,
+        "price": 17,
         "offers": []
     },
     {
         "item": "Y",
-        "price": 10,
+        "price": 20,
         "offers": []
     },
     {
         "item": "Z",
-        "price": 50,
+        "price": 21,
         "offers": []
     },
 ]
