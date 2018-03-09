@@ -90,7 +90,7 @@ def checkout(skus):
                         remainder = value
                         for offer in offers:
                             quantity = offer.get('quantity')
-                            if value >= quantity:
+                            if remainder >= quantity:
                                 special_price = offer.get('special_price')
                                 remainder = value % quantity
                                 offered_quantity = value / quantity
