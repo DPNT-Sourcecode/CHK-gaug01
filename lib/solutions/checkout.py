@@ -2,6 +2,7 @@ from collections import Counter
 from itertools import (
     combinations,
     combinations_with_replacement,
+    zip_longest,
 )
 
 
@@ -237,6 +238,12 @@ def get_item(obj_list, lookup):
     )
 
 
+def grouper(n, iterable, fillvalue=None):
+    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
+
+
 def get_combinations(item_list):
     """
     Returns tuple of promo keys and list of combinations based
@@ -250,9 +257,9 @@ def get_combinations(item_list):
         reverse=True
     )
     sorted_promo = [char['item'] for char in sorted_objs]
-    combination = [
-        comb for comb in combinations(sorted_promo, GROUP_PROMO['quantity'])
-    ]
+    combination = list(grouper(3, sorted_promo))
+    combination = [comb for comb in combination if None not in comb]
+
     return promo, combination
 
 
