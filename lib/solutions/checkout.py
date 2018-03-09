@@ -136,6 +136,10 @@ def checkout(skus):
                                         print(offered_quantity)
                                         if extra == 0:
                                             item_price -= (
+                                                individual_price * offered_quantity
+                                            )
+                                        else:
+                                            item_price -= (
                                                 individual_price * extra
                                             )
                                         has_free = True
