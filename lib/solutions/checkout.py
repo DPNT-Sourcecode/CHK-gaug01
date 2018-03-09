@@ -2,7 +2,7 @@ from collections import Counter
 from itertools import (
     combinations,
     combinations_with_replacement,
-    zip_longest,
+    izip_longest,
 )
 
 
@@ -241,7 +241,7 @@ def get_item(obj_list, lookup):
 def grouper(n, iterable, fillvalue=None):
     "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
-    return zip_longest(*args, fillvalue=fillvalue)
+    return izip_longest(*args, fillvalue=fillvalue)
 
 
 def get_combinations(item_list):
@@ -257,7 +257,9 @@ def get_combinations(item_list):
         reverse=True
     )
     sorted_promo = [char['item'] for char in sorted_objs]
+    print(sorted_promo)
     combination = list(grouper(3, sorted_promo))
+    print(combination)
     combination = [comb for comb in combination if None not in comb]
 
     return promo, combination
@@ -273,28 +275,26 @@ def checkout(skus):
     if len(sku_list) > 0:
         total_price = 0
         promo, combination = get_combinations(sku_list)
-        print(promo)
         promo_len = len(promo)
         if promo_len > 0:
-            for comb in combination:
-                if comb in PROMO_COMBINATIONS and \
-                   GROUP_PROMO['quantity'] < len(sku_list):
-                    for char in comb:
-                        if char in sku_list:
-                            sku_list.remove(char)
-                else:
-                    break
+            # for comb in combination:
+            #     if comb in PROMO_COMBINATIONS and \
+            #        GROUP_PROMO['quantity'] < len(sku_list):
+            #         for char in comb:
+            #             if char in sku_list:
+            #                 sku_list.remove(char)
+            #     else:
+            #         break
 
             num_group = promo_len / GROUP_PROMO['quantity']
             total_price += (GROUP_PROMO['special_price'] * num_group)
 
             # format sku_list to remove the promo items
-            # index = num_group * GROUP_PROMO['quantity']
-            # promo = promo[:index]
-            # for sku in promo:
-            #     sku_list.remove(sku)
+            index = num_group * GROUP_PROMO['quantity']
+            promo = promo[:index]
+            for sku in promo:
+                sku_list.remove(sku)
 
-        print(sku_list)
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
