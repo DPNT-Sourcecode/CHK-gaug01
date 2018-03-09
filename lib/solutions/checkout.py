@@ -103,7 +103,9 @@ def checkout(skus):
                                             offered_quantity * special_price
                                         )
                                     value = remainder
-                            print(offer)
+                        print(obj['item'])
+                        print(offers)
+                        print(item_price)
                         # value here is equivalent to remainder.
                         # if there's still a remainder, compute using
                         # the individual price
