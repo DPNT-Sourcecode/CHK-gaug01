@@ -60,23 +60,21 @@ def checkout(skus):
         denomination = Counter(sku_list)
         keys = set(denomination.keys())
         item_keys = set(ITEMS)
-        free = []
 
         # process only if given `skus` match
         # the existing ITEMS list
         if keys.issubset(item_keys):
             total_price = 0
             for key, value in denomination.items():
-                price_obj = next(
+                obj = next(
                     (
                         price for price in PRICES
                         if price['item'] == key
                     ),
                     None
                 )
-                if price_obj:
+                if obj:
                     item_price = 0
-                    obj = price_obj[0]
                     individual_price = obj.get('price')
                     offers = obj.get('offers')
 
@@ -103,7 +101,8 @@ def checkout(skus):
                                         ),
                                         None
                                     )
-                                    item_price -= free_obj['price'] if free_obj else 0
+                                    if free_obj:
+                                        item_price -= free_obj['price']
 
                                 else:
                                     special_price = offer.get('special_price')
