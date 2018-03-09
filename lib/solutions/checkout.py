@@ -107,6 +107,7 @@ def checkout(skus):
                                     )
                                     if free_obj:
                                         item_price -= free_obj['price']
+                                    print(item_price)
 
                                 else:
                                     special_price = offer.get('special_price')
