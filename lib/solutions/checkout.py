@@ -82,11 +82,10 @@ def checkout(skus):
 
                         remainder = value
                         for offer in offers:
-                            has_free = offer.get('free', False)
-                            if has_free:
 
                             quantity = offer.get('quantity')
                             if remainder >= quantity:
+                                has_free = offer.get('free', False)
                                 special_price = offer.get('special_price')
                                 extra = remainder % quantity
                                 offered_quantity = remainder / quantity
