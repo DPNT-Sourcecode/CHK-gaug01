@@ -44,6 +44,16 @@ PRICES = [
                 "quantity": 2
             }
         ]
+    },
+    {
+        "item": "F",
+        "price": 10,
+        "offers": [
+            {
+                "free": "F",
+                "quantity": 2
+            }
+        ]
     }
 ]
 ITEMS = [item['item'] for item in PRICES]
