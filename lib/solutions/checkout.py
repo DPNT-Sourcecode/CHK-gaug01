@@ -136,10 +136,12 @@ def checkout(skus):
                                         print(offered_quantity)
                                         left = offered_quantity - extra
                                         if extra == 0:
+                                            print("zero")
                                             item_price -= (
                                                 individual_price * offered_quantity
                                             )
                                         else:
+                                            print("extra")
                                             item_price -= (
                                                 individual_price * extra
                                             )
