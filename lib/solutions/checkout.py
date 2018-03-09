@@ -35,6 +35,11 @@ PRICES = [
         "price": 15,
         "offers": []
     },
+    {
+        "item": "E",
+        "price": 40,
+        "offers": []  # this won't matter to the total price
+    }
 ]
 ITEMS = [item['item'] for item in PRICES]
 
@@ -73,6 +78,8 @@ def checkout(skus):
                         remainder = value
                         for offer in offers:
                             quantity = offer.get('quantity')
+                            print(offer)
+                            print(remainder)
                             if remainder >= quantity:
                                 special_price = offer.get('special_price')
                                 remainder = value % quantity
